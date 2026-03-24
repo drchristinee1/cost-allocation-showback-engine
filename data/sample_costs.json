@@ -1,0 +1,5 @@
+[
+  {"resource": "ec2-1", "cost": 5000, "team": "payments"},
+  {"resource": "s3-1", "cost": 2000, "team": "shared"},
+  {"resource": "lambda-1", "cost": 3000, "team": "analytics"}
+]
