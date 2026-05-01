@@ -26,6 +26,7 @@ It enables:
 ## ⚙️ How It Works
 
 The engine follows a simple FinOps flow:
+This flow is designed to transform raw billing data into ownership-aligned cost signals that drive engineering action.
 ---
 
 ## ☁️ AWS CUR Integration (Real Data Layer)
@@ -44,7 +45,7 @@ AWS CUR (S3)
 
 1. AWS CUR delivers detailed billing data into S3
 2. Athena is used to query cost at resource-level granularity
-3. Python retrieves the query results using boto3
+3. Python retrieves and structures the data (boto3 + pandas) to align cost signals with allocation logic and ownership mapping
 4. Data is transformed and passed into the allocation engine
 
 ### 🧠 Example Athena Query
@@ -148,6 +149,25 @@ python main.py
 * Enable showback reporting for engineering teams
 * Support FinOps monthly reviews with ownership-level insights
 
+### 🔎 Example Scenario
+
+A shared Kubernetes cluster incurs $50,000/month in compute and networking costs.
+
+**Without allocation:**
+- Costs appear centralized  
+- No clear ownership  
+- No accountability  
+
+**With this engine:**
+- Costs are distributed across namespaces/teams  
+- Shared platform costs are proportionally allocated  
+- Teams receive clear showback insights  
+
+**Result:**
+- Ownership clarity  
+- Targeted optimization  
+- Improved cost accountability
+  This reflects how FinOps drives behavior change by connecting cost to ownership.
 ---
 
 ## 🔍 Why This Matters
@@ -159,6 +179,15 @@ In many organizations:
 * And action doesn’t happen.
 
 This engine demonstrates how to bridge that gap:
+### 🎯 What Decisions This Enables
+
+- Which teams are driving the highest cost growth?
+- What portion of spend is truly owned vs shared?
+- Where should optimization efforts be prioritized based on financial impact?
+- Which workloads justify commitment strategies (Savings Plans / RIs)?
+- How should costs be communicated in FinOps monthly reviews?
+
+This shifts FinOps from reporting → decision support.
 It also establishes a foundation for connecting financial data directly to engineering ownership at scale.
 
 > **Cost → Allocation → Ownership → Insight → Action**
