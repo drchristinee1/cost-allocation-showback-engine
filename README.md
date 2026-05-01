@@ -187,7 +187,7 @@ This engine demonstrates how to bridge that gap:
 - Which workloads justify commitment strategies (Savings Plans / RIs)?
 - How should costs be communicated in FinOps monthly reviews?
 
-This shifts FinOps from reporting → decision support.
+This shifts FinOps from reporting to decision support.
 It also establishes a foundation for connecting financial data directly to engineering ownership at scale.
 
 > **Cost → Allocation → Ownership → Insight → Action**
