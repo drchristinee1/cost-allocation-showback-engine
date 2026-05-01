@@ -26,6 +26,39 @@ It enables:
 ## ⚙️ How It Works
 
 The engine follows a simple FinOps flow:
+---
+
+## ☁️ AWS CUR Integration (Real Data Layer)
+
+This project can be extended to operate on real AWS billing data using the Cost & Usage Report (CUR).
+
+### 🔄 Data Flow
+
+AWS CUR (S3)
+→ Queried via Athena
+→ Loaded into Python (boto3 + pandas)
+→ Passed into allocation engine
+→ Generates showback output
+
+### 🧱 How It Works
+
+1. AWS CUR delivers detailed billing data into S3
+2. Athena is used to query cost at resource-level granularity
+3. Python retrieves the query results using boto3
+4. Data is transformed and passed into the allocation engine
+
+### 🧠 Example Athena Query
+
+```sql
+SELECT
+    line_item_usage_account_id,
+    product_product_name,
+    line_item_resource_id,
+    DATE(line_item_usage_start_date) AS usage_date,
+    SUM(line_item_unblended_cost) AS cost
+FROM cur_table
+WHERE line_item_line_item_type = 'Usage'
+GROUP BY 1,2,3,4
 
 ### 1. Input Data
 
@@ -126,6 +159,7 @@ In many organizations:
 * And action doesn’t happen.
 
 This engine demonstrates how to bridge that gap:
+It also establishes a foundation for connecting financial data directly to engineering ownership at scale.
 
 > **Cost → Allocation → Ownership → Insight → Action**
 
@@ -133,7 +167,7 @@ This engine demonstrates how to bridge that gap:
 
 ## 🧩 Future Enhancements
 
-* Integration with AWS CUR / Athena
+* - Full production integration with AWS CUR (S3 + Athena + automated ingestion)
 * Tag-based allocation models
 * Kubernetes cost allocation (namespace-level)
 * Jira integration for cost ownership workflows
